@@ -1,10 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:smarttimer/main.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_picker/flutter_picker.dart';
 
+
+
+import 'package:smarttimer/ontap.dart';
 class emom_c_page extends StatefulWidget {
   const emom_c_page({Key? key}) : super(key: key);
 
@@ -23,27 +21,53 @@ class _emom_c_pageState extends State<emom_c_page> {
       appBar: AppBar(
         title: const Text('Configuración del EMOM'),
       ),
-      body: Column(
+      body: Center(
+            child:Column(
         children: [
           Row(
             children: [
               Center(
                 child: Text(
                   'Duracion',
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 )
               ),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      onTapTimer(context);
-                      
-                      Text(_duration.toString());
+                    OnTap.onTapTimer(context, (Duration duration) {
+                      setState(() {
+                        _duration = duration;
+                      });
                     });
+                    
                   },
                   
-                  child:  Text(_duration.toString()),
+                  child:  Text(_duration.toString().substring(0, _duration.toString().length - 7 )),
+              ),
+              ),
+            ],
+          ),
+          
+          Row(
+            children: [
+              Center(
+                child: Text(
+                  'Repeticiones',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                )
+              ),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    OnTap.onTapCounter(context, (int counter) {
+                      setState(() {
+                        _counter = counter;
+                      });
+                    });
+                    
+                  },
+                  child: Text('$_counter Rounds'),
               ),
               ),
             ],
@@ -52,97 +76,41 @@ class _emom_c_pageState extends State<emom_c_page> {
             children: [
               Center(
                 child: Text(
-                  'Repeticiones',
-                  style: Theme.of(context).textTheme.headline4,
+                  'Tiempo total',
+                  style: Theme.of(context).textTheme.headlineMedium,
                 )
               ),
               Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      onTapCounter(context);
-                    });
-                  },
-                  child: Text(_counter.toString() + ' Rounds'),
+                child: Text(
+                   _duration * _counter < const Duration(minutes: 1)
+      ? (_duration*_counter).toString().substring(5, _duration.toString().length - 7)
+      : (_duration * _counter < const Duration(minutes: 10)
+          ? (_duration*_counter).toString().substring(3, _duration.toString().length - 7)
+          : (_duration * _counter < const Duration(minutes: 60)
+            ? (_duration*_counter).toString().substring(2, _duration.toString().length - 7)
+            : (_duration*_counter).toString().substring(0, _duration.toString().length - 7))),
+                  
+                )
               ),
-              ),
+              
             ],
           ),
-          
           Center(
             child: ElevatedButton(
             child: const Text('Go'),
             onPressed: () {
-             Navigator.pop(
-                context
-              );
+             Navigator.pushNamed(context,'/emom/timer',
+              arguments: WidgetEmomData(_duration, _counter));
            },
             ),
           ),
           
         ],
       ),
+    )
     );
     
   }
-  void onTapTimer(BuildContext context) {
   
-  Picker(
-    adapter: NumberPickerAdapter(data: <NumberPickerColumn>[
-      const NumberPickerColumn(begin: 0, end: 999, suffix: Text(' Minutes')),
-      const NumberPickerColumn(begin: 0, end: 60, suffix: Text(' Seconds'), jump: 5),
-    ]),
-    delimiter: <PickerDelimiter>[
-      PickerDelimiter(
-        child: Container(
-          width: 30.0,
-          alignment: Alignment.center,
-          child:  const Icon(Icons.more_vert),
-        ),
-      )
-    ],
-    hideHeader: true,
-    confirmText: 'OK',
-    confirmTextStyle:  const TextStyle(inherit: false, color: Colors.red, fontSize: 22),
-    title: const Text('Select duration'),
-    selectedTextStyle: const TextStyle(color: Colors.blue),
-    onConfirm: (Picker picker, List<int> value) {
-      // You get your duration here
-     setState(() { 
-      _duration = Duration(minutes: picker.getSelectedValues()[0], seconds: picker.getSelectedValues()[1]);
-             
-      });
-    },
-    
-  ).showDialog(context);
-   
-}
-void onTapCounter(BuildContext context) {
-  Picker(
-    adapter: NumberPickerAdapter(data: <NumberPickerColumn>[
-      const NumberPickerColumn(begin: 0, end: 999, suffix: Text(' Rounds')),
-      
-    ]),
-    delimiter: <PickerDelimiter>[
-      PickerDelimiter(
-        child: Container(
-          width: 30.0,
-          alignment: Alignment.center,
-          child: const Icon(Icons.more_vert),
-        ),
-      )
-    ],
-    hideHeader: true,
-    confirmText: 'OK',
-    confirmTextStyle: const TextStyle(inherit: false, color: Colors.red, fontSize: 22),
-    title: const Text('Select duration'),
-    selectedTextStyle: const TextStyle(color: Colors.blue),
-    onConfirm: (Picker picker, List<int> value) {
-      // You get your duration here
-      setState(() {
-        _counter = picker.getSelectedValues()[0];
-      });
-    },
-  ).showDialog(context);
-}
+
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smarttimer/emom_C_page.dart';
+import 'package:smarttimer/emom_timer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const FirstRute(),
-        '/emom_c_page': (context) => const emom_c_page(),
-        '/timer_emom':(context) => const emom_c_page(),
+        '/emom/configuration': (context) => const emom_c_page(),
+        '/emom/timer':(context) => const EmomTimer(),
       },
     );
   }
@@ -43,7 +44,7 @@ class FirstRute extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(
             context,
-            '/emom_c_page',
+            '/emom/configuration',
           );
         },
         ),
