@@ -16,7 +16,7 @@ class TimmerButton extends StatelessWidget {
     
         child: Text(
           text,
-          style: TextStyle(fontSize: 25),
+          style: const TextStyle(fontSize: 25),
           ),
           onPressed: onClicked,
           style: ElevatedButton.styleFrom(
