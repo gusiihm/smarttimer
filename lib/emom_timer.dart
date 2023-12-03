@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:typed_data';
+import 'package:audioplayers/audioplayers.dart';
 
 import 'package:flutter/material.dart';
 import 'package:smarttimer/ontap.dart';
@@ -12,25 +14,43 @@ class EmomTimer extends StatefulWidget {
   EmomTimerState createState() => EmomTimerState();
 }
 class EmomTimerState extends State<EmomTimer>{
- 
+  AudioPlayer audioPlugin = AudioPlayer();
   Duration _duration = const Duration(hours: 0);
   int _counter = 0;
   Duration _elapsed = const Duration(seconds: 10);
   int _serie = 0; 
   Timer? timer;
-
+  Duration _totaltime = const Duration(hours: 0);
+  
   void startTimer(){
     timer =Timer.periodic(const Duration(seconds: 1), (_) {
+       
       if(_elapsed.inSeconds > 0){
-       setState(()=> _elapsed = _elapsed - const Duration(seconds: 1));
-      }else if(_counter > _serie){
-        setState(() {
-          _serie++;
-          _elapsed = _duration;
-        });
-      }else{
-        timer!.cancel();
-      }
+       setState((){
+        if(_serie > 0){
+         _totaltime = _totaltime + const Duration(seconds: 1);
+         
+        }
+        _elapsed = _elapsed - const Duration(seconds: 1);
+        
+        if(_elapsed.inSeconds == 0){
+          soundtime0();
+          if(_counter > _serie){
+            _serie++;
+            _elapsed = _duration;
+          }else{
+            timer!.cancel();
+          }
+        }
+       }
+       
+      );
+      if(_elapsed.inSeconds == 1 || _elapsed.inSeconds == 2 || _elapsed.inSeconds == 3){
+         soundtime();
+        }
+
+      }  
+        
       
       
       });
@@ -41,26 +61,62 @@ class EmomTimerState extends State<EmomTimer>{
     _duration = arg.duration ;
     _counter = arg.counter;
     
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('EMOM'),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 156, 156, 156),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: (){
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text('Are you sure?'),
+                content: const Text('Te quieres rendir?'),
+                actions: [
+                  TextButton(
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                    }, 
+                    child: const Text('No')
+                    ),
+                  TextButton(
+                    onPressed: (){
+                      if(timer!.isActive){
+                        timer!.cancel();
+                       }
+                      Navigator.pushNamed(
+                        context,
+                        '/',
+                        );
+                    }, 
+                    child: const Text('Yes')
+                    ),
+                ],
+              )
+               );
+            
+          },
+        )
         
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            
+            Text(
+              formatDuration( _totaltime),
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)
+              ),
             buildTimer(),
             buildSeries(),
-            const SizedBox(height: 80),
             buildTimmerButon(),
           ],
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 109, 109, 109),
+      backgroundColor: const Color.fromARGB(255, 109, 109, 109),
     );
   }
   Widget buildTimmerButon(){
@@ -83,7 +139,12 @@ class EmomTimerState extends State<EmomTimer>{
       
       text: 'Start',
       onClicked: (){
-        
+        if(_serie == 0){
+          setState(() {
+            _elapsed = const Duration(seconds: 10);
+          });
+
+        }
         startTimer();
       },
     );
@@ -95,8 +156,8 @@ class EmomTimerState extends State<EmomTimer>{
     fit: StackFit.expand,
     children: [
       CircularProgressIndicator(
-        value: 1-_elapsed.inSeconds / _duration.inSeconds,
-        valueColor: AlwaysStoppedAnimation(Color.fromARGB(255, 71, 233, 30)),
+        value: 1-(_elapsed.inSeconds-1) / _duration.inSeconds,
+        valueColor:  const AlwaysStoppedAnimation(Color.fromARGB(255, 71, 233, 30)),
         backgroundColor: Colors.white,
         strokeWidth: 20,
       ),
@@ -115,12 +176,24 @@ class EmomTimerState extends State<EmomTimer>{
     );
   }
  Widget buildSeries() {
-  return Padding(
-    padding: const EdgeInsets.all(20),
-    child: Text(
+  return 
+   
+     Text(
       '$_serie/$_counter',
       style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-    ),
-  );
+    );
+  
 }
+
+  Future<void> soundtime()  async {
+    final player = AudioPlayer();
+    await player.play(AssetSource('sonidos/beeps-bonks-boinks19.mp3'));
+  }
+  
+   Future<void> soundtime0()  async {
+    final player = AudioPlayer();
+    await player.play(AssetSource('sonidos/beeps-bonks-boinks8.mp3'));
+  }
+   
+  
 }

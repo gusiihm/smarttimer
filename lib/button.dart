@@ -16,14 +16,16 @@ class TimmerButton extends StatelessWidget {
     
         child: Text(
           text,
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 25),
           ),
           onPressed: onClicked,
           style: ElevatedButton.styleFrom(
-            shape: CircleBorder(),
-            padding: EdgeInsets.all(30),
-            primary: Colors.white,
-            onPrimary: Colors.black,
+            shape: ContinuousRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            padding: const EdgeInsets.all(10),
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
           ),);
   
 }
