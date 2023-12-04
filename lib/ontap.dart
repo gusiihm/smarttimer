@@ -56,6 +56,15 @@ class WidgetEmomData{
   final int counter;
   WidgetEmomData(this.duration, this.counter);
 }
+class WidgetFinishData {
+    final Duration duration;
+    final int  counter;
+    final int  serie;
+    final Duration  totaltime;
+    final Duration descanso;
+    WidgetFinishData(this.duration, this.counter, this.serie, this.totaltime, this.descanso);
+  
+}
 String formatDuration(Duration duration) {
   final hours = duration.inHours;
   final minutes = duration.inMinutes.remainder(60);

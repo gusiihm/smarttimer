@@ -40,6 +40,7 @@ class EmomTimerState extends State<EmomTimer>{
             _elapsed = _duration;
           }else{
             timer!.cancel();
+            gotofinishpage();
           }
         }
        }
@@ -194,6 +195,13 @@ class EmomTimerState extends State<EmomTimer>{
     final player = AudioPlayer();
     await player.play(AssetSource('sonidos/beeps-bonks-boinks8.mp3'));
   }
-   
+  void gotofinishpage(){
+    Navigator.pushNamed(
+      context,
+      '/finishtimer',
+      arguments: WidgetFinishData(_duration, _counter, _serie, _totaltime, const Duration(seconds: 0)),
+      
+      );
+  }
   
 }
