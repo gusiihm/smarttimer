@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-import 'dart:typed_data';
 import 'package:audioplayers/audioplayers.dart';
 
 import 'package:flutter/material.dart';
@@ -63,61 +61,64 @@ class EmomTimerState extends State<EmomTimer>{
     _counter = arg.counter;
     
     
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('EMOM'),
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 156, 156, 156),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: (){
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => AlertDialog(
-                title: const Text('Are you sure?'),
-                content: const Text('Te quieres rendir?'),
-                actions: [
-                  TextButton(
-                    onPressed: (){
-                      Navigator.of(context).pop();
-                    }, 
-                    child: const Text('No')
-                    ),
-                  TextButton(
-                    onPressed: (){
-                      if(timer!.isActive){
-                        timer!.cancel();
-                       }
-                      Navigator.pushNamed(
-                        context,
-                        '/',
-                        );
-                    }, 
-                    child: const Text('Yes')
-                    ),
-                ],
-              )
-               );
-            
-          },
-        )
-        
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              formatDuration( _totaltime),
-              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)
-              ),
-            buildTimer(),
-            buildSeries(),
-            buildTimmerButon(),
-          ],
+    return PopScope(
+      canPop:  false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('EMOM'),
+          centerTitle: true,
+          backgroundColor: const Color.fromARGB(255, 156, 156, 156),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: (){
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Are you sure?'),
+                  content: const Text('Te quieres rendir?'),
+                  actions: [
+                    TextButton(
+                      onPressed: (){
+                        Navigator.of(context).pop();
+                      }, 
+                      child: const Text('No')
+                      ),
+                    TextButton(
+                      onPressed: (){
+                        if( timer != null || timer!.isActive ){
+                          timer!.cancel();
+                         }
+                        Navigator.pushNamed(
+                          context,
+                          '/',
+                          );
+                      }, 
+                      child: const Text('Yes')
+                      ),
+                  ],
+                )
+                 );
+              
+            },
+          )
+          
         ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                formatDuration( _totaltime),
+                style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)
+                ),
+              buildTimer(),
+              buildSeries(),
+              buildTimmerButon(),
+            ],
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 109, 109, 109),
       ),
-      backgroundColor: const Color.fromARGB(255, 109, 109, 109),
     );
   }
   Widget buildTimmerButon(){

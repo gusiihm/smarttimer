@@ -37,20 +37,77 @@ class FirstRute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 109, 109, 109),
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 156, 156, 156),
         title: const Text('Timer App'),
+        automaticallyImplyLeading: false,
       ),
       body: Center(
-        child: ElevatedButton(
-        child: const Text('Go to second route'),
-        onPressed: () {
-          Navigator.pushNamed(
-            context,
-            '/emom/configuration',
-          );
-        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                shadowColor: Colors.red,
+                elevation: 5
+              ),
+              child: const Text('EMOM',style: TextStyle(color: Colors.white),),
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/emom/configuration',
+                );
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue, // Cambiar el color de fondo
+                shadowColor: Colors.red,
+                elevation: 5
+              ),
+              child: const Text('For Time',style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                // Acción para el botón 2
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green, // Cambiar el color de fondo
+                shadowColor: Colors.red,
+                elevation: 5
+              ),
+              child: const Text('AMRAP',style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                // Acción para el botón 3
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange, // Cambiar el color de fondo
+                shadowColor: Colors.red,
+                elevation: 5
+              ),
+              child: const Text('TABATA',style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                // Acción para el botón 4
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.pink, // Cambiar el color de fondo
+                shadowColor: Colors.red,
+                elevation: 5
+              ),
+              child: const Text('ON Tap',style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                // Acción para el botón 5
+              },
+            ),
+          ],
         ),
-      ),
+        ),     
     );
   }
 }

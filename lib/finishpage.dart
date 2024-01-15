@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:smarttimer/ontap.dart';
 
-class FinishPage extends StatelessWidget {
-  Duration _duration=Duration( seconds: 0);
+class  FinishPage extends StatelessWidget {
+  Duration _duration=const Duration( seconds: 0);
   int _counter =0;
   int _serie=0;
-  Duration _totalTime=Duration( seconds: 0);
-  Duration _descanso=Duration( seconds: 0);
+  Duration _totalTime=const Duration( seconds: 0);
+  Duration _descanso=const Duration( seconds: 0);
 
   
   @override
@@ -21,9 +21,14 @@ class FinishPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 109, 109, 109),
       appBar: AppBar(
-        title: Text('Finish Page'),
+        title: const Text('Finish Page'),
         backgroundColor: const Color.fromARGB(255, 156, 156, 156),
-        
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushNamed(context,'/',);
+          },
+        ),
       ),
       body: Center(
         child: Column(
@@ -32,33 +37,33 @@ class FinishPage extends StatelessWidget {
             
             Text(
               'Duration: ${_duration.inSeconds} seconds',
-              style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold), textAlign: TextAlign.left,
+              style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold), textAlign: TextAlign.left,
             ),
             Text(
               'Descanso: ${_descanso.inSeconds} seconds',
-              style: TextStyle(fontSize: 20),textAlign: TextAlign.left,
+              style:const  TextStyle(fontSize: 20),textAlign: TextAlign.left,
             ),
             Text(
               'Counter: $_counter',
-              style: TextStyle(fontSize: 20),textAlign: TextAlign.left,
+              style: const TextStyle(fontSize: 20),textAlign: TextAlign.left,
             ),
             Text(
               'Serie: $_serie',
-              style: TextStyle(fontSize: 20),textAlign: TextAlign.left,
+              style: const TextStyle(fontSize: 20),textAlign: TextAlign.left,
             ),
             Text(
               'Total Time: ${_totalTime.inMinutes} minutes',
-              style: TextStyle(fontSize: 20),textAlign: TextAlign.left,
+              style: const TextStyle(fontSize: 20),textAlign: TextAlign.left,
             ),
-            Text(
+            const Text(
               "Bien hecho, un paso más cerca de tu objetivo",
-              style: const TextStyle(fontSize: 20),
+              style:  TextStyle(fontSize: 20),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, "/");
               },
-              child: const Text('Back'),
+              child: const Text('Back', style: TextStyle(fontSize: 20,color: Colors.black)),
             ),
           ],
         ),
