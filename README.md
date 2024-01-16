@@ -1,6 +1,6 @@
 # Timer de Ejercicios en Flutter
 
-![Timer App](/ruta/a/la/imagen/del/proyecto.png)
+![Timer App](assets/Imagenes_readme/Inicio.png)
 
 ## Descripción del Proyecto
 
