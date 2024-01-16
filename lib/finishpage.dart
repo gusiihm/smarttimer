@@ -52,7 +52,7 @@ class  FinishPage extends StatelessWidget {
               style: const TextStyle(fontSize: 20),textAlign: TextAlign.left,
             ),
             Text(
-              'Total Time: ${_totalTime.inMinutes} minutes',
+              'Total Time: ${formatDuration(_totalTime)}',
               style: const TextStyle(fontSize: 20),textAlign: TextAlign.left,
             ),
             const Text(

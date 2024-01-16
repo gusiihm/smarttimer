@@ -197,11 +197,7 @@ class EmomTimerState extends State<EmomTimer>{
     await player.play(AssetSource('sonidos/beeps-bonks-boinks8.mp3'));
   }
   void gotofinishpage(){
-    Navigator.pushNamed(
-      context,
-      '/finishtimer',
-      arguments: WidgetFinishData(_duration, _counter, _serie, _totaltime, const Duration(seconds: 0)),
-      
+    Navigator.pushNamed(context, '/finishtimer', arguments: WidgetFinishData(_duration, _counter, _serie, _totaltime, const Duration(seconds: 0))
       );
   }
   

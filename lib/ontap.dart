@@ -56,6 +56,13 @@ class WidgetEmomData{
   final int counter;
   WidgetEmomData(this.duration, this.counter);
 }
+class WidgetonTapData{
+  final Duration duration;
+  final int counter;
+  final bool startAfterCompletion;
+  WidgetonTapData(this.duration, this.counter, this.startAfterCompletion);
+}
+
 class WidgetFinishData {
     final Duration duration;
     final int  counter;

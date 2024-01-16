@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smarttimer/emom_C_page.dart';
 import 'package:smarttimer/emom_timer.dart';
 import 'package:smarttimer/finishpage.dart';
+import 'package:smarttimer/ontap_config_timer.dart';
+import 'package:smarttimer/ontap_timer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +28,8 @@ class MyApp extends StatelessWidget {
         '/emom/configuration': (context) => const emom_c_page(),
         '/emom/timer':(context) => const EmomTimer(),
         '/finishtimer':(context) =>  FinishPage(),
+        '/ontap/configuration':(context) =>  TimerConfigPage_onTap(),
+        '/ontap/timer':(context) => const  OnTapTimer(),
       },
     );
   }
@@ -102,7 +106,10 @@ class FirstRute extends StatelessWidget {
               ),
               child: const Text('ON Tap',style: TextStyle(color: Colors.white)),
               onPressed: () {
-                // Acción para el botón 5
+                 Navigator.pushNamed(
+                  context,
+                  '/ontap/configuration',
+                );
               },
             ),
           ],
