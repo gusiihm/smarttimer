@@ -26,13 +26,14 @@ La aplicación se encuentra en constante desarrollo, y se planea agregar más fu
 
 ## Capturas de Pantalla
 
-![Captura de Pantalla 1](/ruta/a/la/captura1.png)
-![Captura de Pantalla 2](/ruta/a/la/captura2.png)
-![Captura de Pantalla 3](/ruta/a/la/captura3.png)
+![Captura de Pantalla 1](assets/Imagenes_readme/ontapconfig.png)
+![Captura de Pantalla 2](assets/Imagenes_readme/emom_timer.png)
+![Captura de Pantalla 3](assets/Imagenes_readme/finsh_page.png)
 
-## Instalación
 
-1. Clone el repositorio a su máquina local.
-   ```bash
-   git clone https://github.com/tu-usuario/tu-proyecto.git
-e.
+##Contribuciones
+
+Las contribuciones son bienvenidas. Si tienes ideas para mejorar la aplicación o deseas agregar nuevas funcionalidades, ¡no dudes en enviar una solicitud de extracción!
+
+
+Si tienes preguntas o sugerencias, puedes contactarme a través de ![correo electrónico](ghonoresmurray@gmail.com). ¡Espero que disfrutes usando la aplicación!
