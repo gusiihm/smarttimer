@@ -31,7 +31,7 @@ La aplicación se encuentra en constante desarrollo, y se planea agregar más fu
 ![Captura de Pantalla 3](assets/Imagenes_readme/finsh_page.png)
 
 
-##Contribuciones
+## Contribuciones
 
 Las contribuciones son bienvenidas. Si tienes ideas para mejorar la aplicación o deseas agregar nuevas funcionalidades, ¡no dudes en enviar una solicitud de extracción!
 
