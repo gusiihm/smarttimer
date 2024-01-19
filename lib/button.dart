@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smarttimer/ontap.dart';
+
 
 class TimmerButton extends StatelessWidget {
   final String text;

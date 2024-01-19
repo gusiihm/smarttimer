@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:smarttimer/emom_C_page.dart';
 import 'package:smarttimer/emom_timer.dart';
 import 'package:smarttimer/finishpage.dart';
+import 'package:smarttimer/fortime_cofig_timer.dart';
+import 'package:smarttimer/fortime_timer.dart';
 import 'package:smarttimer/ontap_config_timer.dart';
 import 'package:smarttimer/ontap_timer.dart';
+import 'package:smarttimer/tabata_config.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +33,9 @@ class MyApp extends StatelessWidget {
         '/finishtimer':(context) =>  FinishPage(),
         '/ontap/configuration':(context) =>  TimerConfigPage_onTap(),
         '/ontap/timer':(context) => const  OnTapTimer(),
+        '/fortime/config':(context) =>  TimerConfigPage(),
+        '/fortime/timer':(context) => const  ForTimeTimer(),
+        '/tabata/config':(context) =>  TabataConfigPage(),
       },
     );
   }
@@ -73,7 +79,10 @@ class FirstRute extends StatelessWidget {
               ),
               child: const Text('For Time',style: TextStyle(color: Colors.white)),
               onPressed: () {
-                // Acción para el botón 2
+                Navigator.pushNamed(
+                  context,
+                  '/fortime/config',
+                );
               },
             ),
             ElevatedButton(
@@ -95,7 +104,10 @@ class FirstRute extends StatelessWidget {
               ),
               child: const Text('TABATA',style: TextStyle(color: Colors.white)),
               onPressed: () {
-                // Acción para el botón 4
+               Navigator.pushNamed(
+                  context,
+                  '/tabata/config',
+                );
               },
             ),
             ElevatedButton(

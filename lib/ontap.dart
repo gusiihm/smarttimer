@@ -62,6 +62,11 @@ class WidgetonTapData{
   final bool startAfterCompletion;
   WidgetonTapData(this.duration, this.counter, this.startAfterCompletion);
 }
+class WidgetForTimeData{
+  final Duration duration;
+  final bool nonlimit;
+  WidgetForTimeData(this.duration, this.nonlimit);
+}
 
 class WidgetFinishData {
     final Duration duration;

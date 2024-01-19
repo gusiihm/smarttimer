@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:smarttimer/ontap.dart';
 
 class  FinishPage extends StatelessWidget {
-  Duration _duration=const Duration( seconds: 0);
-  int _counter =0;
-  int _serie=0;
-  Duration _totalTime=const Duration( seconds: 0);
-  Duration _descanso=const Duration( seconds: 0);
+ 
 
   
   @override
   Widget build(BuildContext context) {
     final WidgetFinishData arg = ModalRoute.of(context)!.settings.arguments as WidgetFinishData;
-    _duration = arg.duration;
-    _counter = arg.counter; 
-    _serie = arg.serie; 
-    _totalTime = arg.totaltime;
-    _descanso = arg.descanso;
+    final _duration = arg.duration;
+    final  _counter = arg.counter; 
+    final _serie = arg.serie; 
+    final _totalTime = arg.totaltime;
+    final _descanso = arg.descanso;
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 109, 109, 109),
