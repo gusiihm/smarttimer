@@ -67,6 +67,13 @@ class WidgetForTimeData{
   final bool nonlimit;
   WidgetForTimeData(this.duration, this.nonlimit);
 }
+class WidgetTabataData{
+  final Duration workDuration;
+  final Duration restDuration;
+  final int rounds;
+  WidgetTabataData(this.workDuration, this.restDuration, this.rounds);
+}
+
 
 class WidgetFinishData {
     final Duration duration;

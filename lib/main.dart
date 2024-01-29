@@ -4,9 +4,11 @@ import 'package:smarttimer/emom_timer.dart';
 import 'package:smarttimer/finishpage.dart';
 import 'package:smarttimer/fortime_cofig_timer.dart';
 import 'package:smarttimer/fortime_timer.dart';
+import 'package:smarttimer/info_uso.dart';
 import 'package:smarttimer/ontap_config_timer.dart';
 import 'package:smarttimer/ontap_timer.dart';
 import 'package:smarttimer/tabata_config.dart';
+import 'package:smarttimer/tabata_timer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,6 +38,10 @@ class MyApp extends StatelessWidget {
         '/fortime/config':(context) =>  TimerConfigPage(),
         '/fortime/timer':(context) => const  ForTimeTimer(),
         '/tabata/config':(context) =>  TabataConfigPage(),
+        '/tabata/timer':(context) => const  TabataTimer(),
+        '/info/uso':(context) =>   InfoUsoPage(),
+        '/info/desarrollo':(context) =>  InfoDesarrolloPage(),
+        '/info/sugerecias':(context) =>   InfoSugereciasPage(),
       },
     );
   }
@@ -52,6 +58,47 @@ class FirstRute extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 156, 156, 156),
         title: const Text('Timer App'),
         automaticallyImplyLeading: false,
+         actions: [
+          PopupMenuButton(
+            onSelected: (value) {
+              if (value == "Uso") {
+                Navigator.pushNamed(
+                  context,
+                  '/info/uso',
+                );
+              } else if (value == "Desarrollo") {
+                Navigator.pushNamed(
+                  context,
+                  '/info/desarrollo',
+                );
+              } else if (value == "Sugerecias") {
+                Navigator.pushNamed(
+                  context,
+                  '/info/sugerecias',
+                );
+              }
+            },
+            itemBuilder: (context) => [
+            const PopupMenuItem(
+              value: "Uso",
+              child: Text(
+              "Uso de la app",
+            ),
+              
+            ),
+            const PopupMenuItem(
+              value: "Desarrollo",
+              child: Text("Desarrollo"),
+              
+            ),
+            const PopupMenuItem(
+              value: "Sugerecias",
+              child: Text("Sugerecias"),
+              
+            ),
+          ]
+          )
+    ]
       ),
       body: Center(
         child: Column(
@@ -85,9 +132,13 @@ class FirstRute extends StatelessWidget {
                 );
               },
             ),
-            ElevatedButton(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Center(
+                  child: Row(children: [ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green, // Cambiar el color de fondo
+                backgroundColor: Colors.grey, // Cambiar el color de fondo
                 shadowColor: Colors.red,
                 elevation: 5
               ),
@@ -95,7 +146,16 @@ class FirstRute extends StatelessWidget {
               onPressed: () {
                 // Acción para el botón 3
               },
+              
+
             ),
+            const SizedBox(width: 10,),
+             const Text('Proximamente',style: TextStyle(color: Colors.white),)
+            ]),)
+            ],),
+                
+            
+            
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange, // Cambiar el color de fondo

@@ -14,14 +14,17 @@ class _TabataConfigPageState extends State<TabataConfigPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 109, 109, 109),
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 156, 156, 156),
         title: const Text('Configuración Tabata'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Center(
+        
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text('Duración del trabajo '),
+            Text('Duración del trabajo ', style: Theme.of(context).textTheme.headlineMedium,),
             ElevatedButton(
                   onPressed: () {
                     OnTap.onTapTimer(context, (Duration duration) {
@@ -33,7 +36,7 @@ class _TabataConfigPageState extends State<TabataConfigPage> {
                   },                  
                   child: Text(workDuration.toString().substring(0, workDuration.toString().length - 7 )),
               ),
-            const Text('Duración del descanso '),
+            Text('Duración del descanso ', style: Theme.of(context).textTheme.headlineMedium,),
             ElevatedButton(
                   onPressed: () {
                     OnTap.onTapTimer(context, (Duration duration) {
@@ -45,7 +48,7 @@ class _TabataConfigPageState extends State<TabataConfigPage> {
                   },                  
                   child:  Text(restDuration.toString().substring(0,restDuration.toString().length - 7 )),
               ),
-            const Text('Número de rondas'),
+            Text('Número de rondas', style: Theme.of(context).textTheme.headlineMedium,),
             ElevatedButton(
                   onPressed: () {
                     OnTap.onTapCounter(context, (int counter) {
@@ -60,7 +63,13 @@ class _TabataConfigPageState extends State<TabataConfigPage> {
            ElevatedButton(
               child: const Text('Iniciar Timer'),
               onPressed: () {
-                // Aquí puedes implementar la lógica para iniciar el timer
+                if(workDuration.inSeconds != 0 || restDuration.inSeconds != 0 || rounds != 0){
+                  Navigator.of(context).pushNamed(
+                  '/tabata/timer',
+                  arguments: WidgetTabataData(workDuration, restDuration, rounds)
+                );
+                }
+                
               },
             ),
           ],

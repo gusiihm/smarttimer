@@ -5,17 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:smarttimer/ontap.dart';
 import 'button.dart';
 
-class EmomTimer extends StatefulWidget {
-  const EmomTimer({Key? key}) : super(key: key);
+class TabataTimer extends StatefulWidget {
+  const TabataTimer({Key? key}) : super(key: key);
 
   @override
-  EmomTimerState createState() => EmomTimerState();
+  TabataTimerState createState() => TabataTimerState();
 }
-class EmomTimerState extends State<EmomTimer>{
+class TabataTimerState extends State<TabataTimer>{
   AudioPlayer audioPlugin = AudioPlayer();
-  Duration _duration = const Duration(hours: 0);
+  Duration workDuration= const Duration(hours: 0);
   int _counter = 0;
   Duration _elapsed = const Duration(seconds: 10);
+  Duration restDuration = const Duration(seconds: 30);
+  bool worktime = false;
   int _serie = 0; 
   Timer? timer;
   Duration _totaltime = const Duration(hours: 0);
@@ -33,10 +35,16 @@ class EmomTimerState extends State<EmomTimer>{
         
         if(_elapsed.inSeconds == 0){
           soundtime0();
-          if(_counter > _serie){
+          if(_counter > _serie && worktime == false){
             _serie++;
-            _elapsed = _duration;
-          }else{
+            _elapsed = workDuration;
+            worktime = true;
+          }
+          else if(_counter > _serie && worktime == true){
+            _elapsed = restDuration;
+            worktime = false;
+            }
+          else{
             timer!.cancel();
             gotofinishpage();
           }
@@ -45,6 +53,7 @@ class EmomTimerState extends State<EmomTimer>{
          soundtime();
         }
        }
+       
        
       );
       
@@ -57,9 +66,10 @@ class EmomTimerState extends State<EmomTimer>{
   }
   @override
   Widget build(BuildContext context){
-    final WidgetEmomData arg = ModalRoute.of(context)!.settings.arguments as WidgetEmomData;
-    _duration = arg.duration ;
-    _counter = arg.counter;
+    final WidgetTabataData arg = ModalRoute.of(context)!.settings.arguments as WidgetTabataData;
+    workDuration= arg.workDuration ;
+    _counter = arg.rounds;
+    restDuration = arg.restDuration;
     
     
     return PopScope(
@@ -159,8 +169,8 @@ class EmomTimerState extends State<EmomTimer>{
     fit: StackFit.expand,
     children: [
       CircularProgressIndicator(
-        value: 1-(_elapsed.inSeconds-1) / _duration.inSeconds,
-        valueColor:  const AlwaysStoppedAnimation(Color.fromARGB(255, 71, 233, 30)),
+        value: 1-(_elapsed.inSeconds-1) / workDuration.inSeconds,
+        valueColor:  AlwaysStoppedAnimation<Color?>(colorirculo()),
         backgroundColor: Colors.white,
         strokeWidth: 20,
       ),
@@ -178,6 +188,14 @@ class EmomTimerState extends State<EmomTimer>{
       style: const TextStyle(fontSize: 80, fontWeight: FontWeight.bold),
     );
   }
+ Color colorirculo(){
+  if(worktime == true){
+    return const Color.fromARGB(255, 71, 233, 30);
+  }
+  else{
+    return const Color.fromARGB(255, 233, 71, 71);
+  }
+ }
  Widget buildSeries() {
   return 
    
@@ -198,7 +216,7 @@ class EmomTimerState extends State<EmomTimer>{
     await player.play(AssetSource('sonidos/beeps-bonks-boinks8.mp3'));
   }
   void gotofinishpage(){
-    Navigator.pushNamed(context, '/finishtimer', arguments: WidgetFinishData(_duration, _counter, _serie, _totaltime, const Duration(seconds: 0))
+    Navigator.pushNamed(context, '/finishtimer', arguments: WidgetFinishData(workDuration, _counter, _serie, _totaltime, restDuration)
       );
   }
   

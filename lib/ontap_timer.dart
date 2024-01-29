@@ -113,12 +113,13 @@ class OnTapTimerState extends State<OnTapTimer>{
             gotofinishpage();
           }
         }
+        if(_elapsed.inSeconds == 1 || _elapsed.inSeconds == 2 || _elapsed.inSeconds == 3){
+         soundtime();
+        }
        }
        
       );
-      if(_elapsed.inSeconds == 1 || _elapsed.inSeconds == 2 || _elapsed.inSeconds == 3){
-         soundtime();
-        }
+      
 
       }  
         

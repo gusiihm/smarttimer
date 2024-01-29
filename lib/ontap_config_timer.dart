@@ -90,8 +90,13 @@ class _TimerConfigPageState extends State<TimerConfigPage_onTap> {
             
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context,'/ontap/timer', arguments: WidgetonTapData(_duration, _repetitions, _startAfterCompletion));
-              },
+                if(_duration.inSeconds != 0 || _repetitions != 0){
+                  Navigator.of(context).pushNamed(
+                  '/ontap/timer',
+                  arguments: WidgetonTapData(_duration, _repetitions, _startAfterCompletion)
+                );
+                }
+             },
               child: const Text('Go'),
             ),
           ],

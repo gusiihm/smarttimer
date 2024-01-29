@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 0.1.0+1
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
@@ -38,18 +38,23 @@ dependencies:
   duration_picker: ^1.1.0+1
   flutter_picker: ^2.1.0
   audioplayers: ^5.2.0
-  
+  url_launcher: ^6.0.4
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  
+
+flutter_icons:
+  android: "launcher_icon"
+  image_path: "assets/Imagenes_iconos/cronometro_multifuncion_.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -64,6 +69,8 @@ flutter:
   assets:
     - assets/sonidos/beeps-bonks-boinks19.mp3
     - assets/sonidos/beeps-bonks-boinks8.mp3
+    - assets/Imagenes_iconos/25231.png
+    - assets/Imagenes_iconos/cronometro_multifuncion_.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

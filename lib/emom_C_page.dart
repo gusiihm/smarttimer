@@ -18,13 +18,17 @@ class _emom_c_pageState extends State<emom_c_page> {
   Widget build(BuildContext context) {
     
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 109, 109, 109),
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 156, 156, 156),
         title: const Text('Configuración del EMOM'),
       ),
       body: Center(
             child:Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Center(
                 child: Text(
@@ -50,6 +54,7 @@ class _emom_c_pageState extends State<emom_c_page> {
           ),
           
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Center(
                 child: Text(
@@ -73,6 +78,7 @@ class _emom_c_pageState extends State<emom_c_page> {
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Center(
                 child: Text(
